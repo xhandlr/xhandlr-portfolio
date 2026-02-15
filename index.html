@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xhandlr | Camille Elgueta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #e5e7eb;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+        * {
+            scroll-behavior: smooth;
+        }
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+        .red-glow {
+            text-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+        }
+        .blue-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+        .blue-gradient-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1) 0%, rgba(5, 5, 5, 1) 100%);
+        }
+        .scroll-mt-20 {
+            scroll-margin-top: 5rem;
+        }
+        
+        /* Custom Cursor Elements */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 242, 255, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, background 0.3s ease;
+            mix-blend-mode: difference;
+        }
+        #cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 187, 255, 0.758);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-hover #custom-cursor {
+            transform: scale(2.5);
+            background: rgba(239, 68, 68, 0.6);
+        }
+        .cursor-hover #cursor-outline {
+            transform: scale(1.5);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        /* Typewriter Cursor */
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            color: #ef4444;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-pulse {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .delay-150 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-300 {
+            animation-delay: 1s;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="blue-gradient-bg">
+    <div id="custom-cursor"></div>
+    <div id="cursor-outline"></div>
+    <div id="root"></div>
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const outline = document.getElementById('cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            outline.style.left = e.clientX - 20 + 'px';
+            outline.style.top = e.clientY - 20 + 'px';
+        });
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                document.body.classList.add('cursor-hover');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                document.body.classList.remove('cursor-hover');
+            }
+        });
+    </script>
+<script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

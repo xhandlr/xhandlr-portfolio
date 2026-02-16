@@ -1,28 +1,31 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Calendar, Award, Code, GraduationCap } from 'lucide-react';
+import { Award, Code, GraduationCap } from 'lucide-react';
 
 const Timeline: React.FC = () => {
   const events = [
     {
-      year: "Actualidad",
-      title: "Ingeniería Civil Informática",
-      org: "Universidad de La Frontera",
-      desc: "Enfocado en Arquitectura de Software.",
+      start: "Dic 2025",
+      finish: "Actualidad",
+      title: "Desarrolladora Frontend",
+      org: "CEOsim",
+      desc: "Rediseño de interfaces para plataforma educativa SaaS con Angular.",
       icon: <GraduationCap className="w-5 h-5" />
     },
     {
-      year: "2024",
-      title: "Desarrollo Fullstack",
-      org: "Proyectos Académicos",
-      desc: "Desarrollé",
+      start: "Mar 2024",
+      finish: "Actualidad",
+      title: "Tutora Académica",
+      org: "Universidad de La Frontera",
+      desc: "Llevo más de un año apoyando a estudiantes de diferentes carreras en áreas como Fundamentos de Matemáticas, Cálculo y Física.",
       icon: <Code className="w-5 h-5" />
     },
     {
-      year: "2023",
-      title: "Proyecto Académico",
-      org: "Proyecto Vocación360",
-      desc: "Caso de estudio.",
+      start: "Ene 2026",
+      finish: "Feb 2026",
+      title: "Práctica Full-Stack",
+      org: "Centro de Negocios Sercotec Temuco",
+      desc: "Desarrollo de plataforma web con Next.js y Supabase para digitalización de servicios empresariales.",
       icon: <Award className="w-5 h-5" />
     }
   ];
@@ -43,23 +46,23 @@ const Timeline: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-[#050505]">
+    <section className="py-24 bg-[#0a0f1e]">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div className="reveal">
-            <h2 className="text-sm font-mono text-red-500 uppercase tracking-[0.3em] mb-4">Journey</h2>
-            <h3 className="text-4xl font-black mb-12">Academic & Career Path</h3>
+            <h2 className="text-sm font-mono text-red-500 uppercase tracking-[0.3em] mb-4">Trayectoria</h2>
+            <h3 className="text-5xl font-black mb-12 text-white">Experiencia</h3>
             
             <div className="space-y-12 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-white/10">
               {events.map((event, idx) => (
                 <div key={idx} className="relative pl-12 group">
-                  <div className="absolute left-0 top-1 p-1 bg-[#050505] border-2 border-red-500 rounded-full text-red-500 group-hover:scale-125 transition-transform z-10">
+                  <div className="absolute left-0 top-1 p-1 bg-[#0a0f1e] border-2 border-red-500 rounded-full text-red-500 group-hover:scale-125 transition-transform z-10">
                     {event.icon}
                   </div>
-                  <span className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-2 block">{event.year}</span>
-                  <h4 className="text-xl font-bold mb-1 text-white group-hover:text-red-500 transition-colors">{event.title}</h4>
-                  <p className="text-blue-400 text-sm font-medium mb-3 italic">{event.org}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed max-w-md">{event.desc}</p>
+                  <span className="text-sm font-mono text-gray-300 uppercase tracking-widest mb-2 block">{event.start} - {event.finish}</span>
+                  <h4 className="text-2xl font-bold mb-2 text-white group-hover:text-red-500 transition-colors">{event.title}</h4>
+                  <p className="text-blue-400 text-base font-medium mb-3 italic">{event.org}</p>
+                  <p className="text-gray-200 text-base leading-relaxed max-w-md">{event.desc}</p>
                 </div>
               ))}
             </div>

@@ -63,14 +63,14 @@ const Hero: React.FC = () => {
               {showCursor && <span className="text-red-500 animate-pulse ml-1">|</span>}
             </h1>
             <p className="text-gray-200 text-sm md:text-base mt-6 font-mono">
-              Desarrolladora Full Stack | Apasionada por el desarrollo de software y el análisis de malware.
+              Desarrolladora Full Stack | Construyo productos digitales que resuelven problemas reales.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 mb-12">
             <a href={SOCIAL_LINKS.github} target="_blank" className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors">
               <Github className="w-5 h-5" />
-              <span className="text-sm font-mono tracking-wider">GitLab</span>
+              <span className="text-sm font-mono tracking-wider">GitHub</span>
             </a>
             <a href={SOCIAL_LINKS.linkedin} target="_blank" className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors">
               <Linkedin className="w-5 h-5" />
@@ -94,12 +94,6 @@ const Hero: React.FC = () => {
               CONTACTARME
             </a>
           </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-12 right-12 hidden lg:block opacity-10 animate-pulse">
-        <div className="font-mono text-[80px] font-black tracking-tighter leading-none select-none pointer-events-none text-blue-500">
-          XHDR
         </div>
       </div>
     </section>

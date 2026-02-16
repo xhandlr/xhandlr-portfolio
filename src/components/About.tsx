@@ -1,5 +1,5 @@
 import BugImage from '../assets/bug.png';
-import CodeImage from '../assets/code.png';
+import SoftwareImage from '../assets/software.png';
 import HeartImage from '../assets/heart.png';
 
 /**
@@ -12,9 +12,9 @@ import HeartImage from '../assets/heart.png';
  */
 const About = () => {
   const interests = [
-    { image: BugImage, title: "Análisis de Malware", desc: "Disfruto analizar muestras de malware y aprender de sus patrones." },
-    { image: HeartImage, title: "Diseño UX/UI", desc: "Creando interfaces intuitivas y estéticas." },
-    { image: CodeImage, title: "Desarrollo de Software", desc: "Construyendo aplicaciones escalables y robustas." },
+    { image: BugImage, title: "Análisis de Malware", desc: "Certificada en Curso de Practical Malware Analysis & Triage (TCM Security)." },
+    { image: HeartImage, title: "Diseño UX/UI", desc: "Creo interfaces pensando en usuarios reales." },
+    { image: SoftwareImage, title: "Desarrollo de Software", desc: "Construyo aplicaciones escalables con arquitecturas limpias." },
   ];
 
   return (
@@ -51,10 +51,16 @@ const About = () => {
           {/* Texto introductorio */}
           <div className="mb-16">
             <h2 className="text-sm font-mono text-red-500 uppercase tracking-[0.3em] mb-4">Sobre Mi</h2>
-            <h3 className="text-4xl font-black mb-8 leading-tight text-white">Me gusta crear cosas nuevas y aprender.</h3>
+            <h3 className="text-4xl font-black mb-8 leading-tight text-white">Me interesa la construcción de productos digitales</h3>
             
             <p className="text-gray-400 leading-relaxed mb-2 text-lg max-w-3xl">
-              Hola! Soy Camille Elgueta, una estudiante de Ingeniería Civil Informática en Temuco, Chile. Mi trayectoria en tecnología está impulsada por la curiosidad desde la lógica intrincada de muestras de malware hasta la psicología detrás de una interfaz de usuario perfecta. Me destaco en proyectos que requieren habilidades interdisciplinarias.
+              Hola, soy Camille Elgueta, estudiante de 5° año de Ingeniería Civil Informática en UFRO.
+              Me especializo en construir productos digitales completos:
+              desde investigación de usuarios hasta implementación técnica.
+
+              Cuando no estoy programando, exploro análisis de malware,
+              diseño interfaces en Figma, o ayudo a estudiantes a entender
+              matemáticas complejas como tutora académica.
             </p>
           </div>
 

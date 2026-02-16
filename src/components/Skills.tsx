@@ -6,7 +6,6 @@ const Skills: React.FC = () => {
     // Lenguajes
     { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", category: "Lenguajes" },
     { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", category: "Lenguajes" },
-    { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", category: "Lenguajes" },
     { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg", category: "Lenguajes" },
     
     // Frontend
@@ -21,14 +20,20 @@ const Skills: React.FC = () => {
     
     // Backend & Cloud
     { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", category: "Backend" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", category: "Backend" },
+    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", category: "Backend" },
     { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg", category: "Backend" },
-    { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg", category: "Cloud" },
+
+    // Cloud
+    { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg", category: "Cloud" },
     { name: "Cloudflare", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg", category: "Cloud" },
     
     // Tools
     { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", category: "Tools" },
-    { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", category: "Tools" },
-    { name: "VirtualBox", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/virtualbox/virtualbox-original.svg", category: "Tools" },
+    { name: "GitHub", icon: "https://cdn.simpleicons.org/github/white", category: "Tools" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", category: "Tools" },
+    { name: "Insomnia", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/insomnia/insomnia-original.svg", category: "Tools" },
+    { name: "SonarQube", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg", category: "Tools" }
   ];
 
   const categories = ["Lenguajes", "Frontend", "Design", "Backend", "Cloud", "Tools"];
@@ -84,28 +89,6 @@ const Skills: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Skills adicionales (texto) */}
-        <div className="mt-12 p-6 border border-white/10 rounded-2xl bg-[#050505]">
-          <h4 className="text-sm font-mono text-gray-500 uppercase tracking-wider mb-4">
-            Otras Competencias
-          </h4>
-          <div className="flex flex-wrap gap-3">
-            {[
-              "OWASP", "Análisis Dinámico", "Análisis Estático", 
-              "Debuggers", "Any.run", "WCAG", "User Research", 
-              "Prototyping", "CI/CD", "Priorización MoSCoW",
-              "Comunicación Efectiva", "Autoaprendizaje"
-            ].map((skill) => (
-              <span 
-                key={skill}
-                className="px-3 py-1 text-xs border border-white/10 rounded-full text-gray-400 hover:border-red-500/50 hover:text-white transition-all"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>

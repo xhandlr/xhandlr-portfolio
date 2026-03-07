@@ -23,10 +23,18 @@ const Timeline: React.FC = () => {
     {
       start: "Ene 2026",
       finish: "Feb 2026",
-      title: "Práctica Full-Stack",
+      title: "Práctica II - Full-Stack",
       org: "Centro de Negocios Sercotec Temuco",
       desc: "Desarrollo de plataforma web con Next.js y Supabase para digitalización de servicios empresariales.",
       icon: <Award className="w-5 h-5" />
+    },
+    {
+      start: "Ene 2024",
+      finish: "Ene 2024",
+      title: "Práctica I - Full-Stack",
+      org: "CEOSim",
+      desc: "Desarrollo de nuevas funcionalidades para plataforma SaaS bajo metodología ágil (Jira). Incluyendo un sistema de logros completos y optimización de rendimiento con la reducción de 74% en peso de assets.",
+      icon: <Code className="w-5 h-5" />
     }
   ];
 

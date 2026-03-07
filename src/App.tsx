@@ -28,10 +28,10 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
-        <div className="reveal"><About /></div>
-        <div className="reveal"><Skills /></div>
-        <Timeline />
         <div className="reveal"><Projects /></div>
+        <div className="reveal"><Skills /></div>
+        <div className="reveal"><About /></div>
+        <Timeline />
       </main>
       <Footer />
       

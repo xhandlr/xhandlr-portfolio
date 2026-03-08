@@ -16,12 +16,17 @@ export interface Project {
   accentColor?: string;
 }
 
-export interface Achievement {
+export interface TimelineEvent {
+  start: string;
+  finish: string;
   title: string;
-  icon: string;
+  org: string;
+  desc: string;
+  tags: string[];
 }
 
-export interface Skill {
+export interface SkillItem {
   name: string;
   icon: string;
+  category: string;
 }

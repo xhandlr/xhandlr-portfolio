@@ -1,6 +1,10 @@
 import TcmLogo from '../assets/tcm-logo.png';
 import { ExternalLink } from 'lucide-react';
 
+/**
+ * Componente de la sección "Sobre Mi" que incluye un diseño diagonal con doble línea (gris y roja) y una card destacada de certificación.
+ * 
+ */
 const About = () => {
   return (
     <section id="about" className="relative scroll-mt-20 overflow-hidden">

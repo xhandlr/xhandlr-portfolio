@@ -1,65 +1,42 @@
 
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { ExternalLink, Github, ArrowRight, ChevronLeft, ChevronRight, Calendar, PenTool, X, ZoomIn } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, Github, ArrowRight, Calendar, PenTool } from 'lucide-react';
 import { PROJECTS } from '../constants';
+import { TAG_ICONS } from '../data/tagIcons';
+import { Project } from '../types';
+import ProjectGallery from './projects/ProjectGallery';
+import ProjectLightbox from './projects/ProjectLightbox';
 
-const TAG_ICONS: Record<string, string> = {
-  "React": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  "MySQL": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-  "Docker": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  "Tailwind": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-  "Supabase": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-  "Cloudflare": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg",
-  "Figma": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  "Flutter": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
-  "Arduino": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg",
-  "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  "Angular": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
-  "SonarQube": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg",
-  "Laravel": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+/** Estado del lightbox: qué proyecto/imagen está abierta. */
+interface LightboxState {
+  images: string[];
+  initialIdx: number;
+  title: string;
+}
+
+/** Retorna la etiqueta de fecha formateada del proyecto. */
+const getDateLabel = (project: Project): string | null => {
+  if (project.startDate && project.endDate) return `${project.startDate} – ${project.endDate}`;
+  if (project.startDate) return project.startDate;
+  if (project.date) return project.date;
+  return null;
 };
 
+/**
+ * Sección de proyectos destacados.
+ * Alterna el layout galería/info en filas pares e impares.
+ */
 const Projects: React.FC = () => {
-  const [currentImageIndexes, setCurrentImageIndexes] = useState<Record<number, number>>(
-    PROJECTS.reduce((acc, _, idx) => ({ ...acc, [idx]: 0 }), {})
+  const [currentIdxs, setCurrentIdxs] = useState<Record<number, number>>(
+    PROJECTS.reduce((acc, _, i) => ({ ...acc, [i]: 0 }), {})
   );
-  const [lightbox, setLightbox] = useState<{ images: string[]; idx: number; title: string } | null>(null);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
-  useEffect(() => {
-    if (!lightbox) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightbox(null);
-      if (e.key === 'ArrowRight') setLightbox(prev => prev ? { ...prev, idx: (prev.idx + 1) % prev.images.length } : null);
-      if (e.key === 'ArrowLeft') setLightbox(prev => prev ? { ...prev, idx: (prev.idx - 1 + prev.images.length) % prev.images.length } : null);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [lightbox]);
+  const nextImage = (projIdx: number, total: number) =>
+    setCurrentIdxs((prev: Record<number, number>) => ({ ...prev, [projIdx]: (prev[projIdx] + 1) % total }));
 
-  const nextImage = (projectIdx: number, totalImages: number) => {
-    setCurrentImageIndexes(prev => ({
-      ...prev,
-      [projectIdx]: prev[projectIdx] === totalImages - 1 ? 0 : prev[projectIdx] + 1
-    }));
-  };
-
-  const prevImage = (projectIdx: number, totalImages: number) => {
-    setCurrentImageIndexes(prev => ({
-      ...prev,
-      [projectIdx]: prev[projectIdx] === 0 ? totalImages - 1 : prev[projectIdx] - 1
-    }));
-  };
-
-  const getDateLabel = (project: (typeof PROJECTS)[0]) => {
-    if (project.startDate && project.endDate) return `${project.startDate} – ${project.endDate}`;
-    if (project.startDate) return project.startDate;
-    if (project.date) return project.date;
-    return null;
-  };
+  const prevImage = (projIdx: number, total: number) =>
+    setCurrentIdxs((prev: Record<number, number>) => ({ ...prev, [projIdx]: (prev[projIdx] - 1 + total) % total }));
 
   return (
     <section id="projects" className="scroll-mt-20 bg-[#0a0f1e]">
@@ -71,15 +48,14 @@ const Projects: React.FC = () => {
         </div>
       </div>
 
-      {/* Proyectos */}
+      {/* Lista de proyectos */}
       <div>
         {PROJECTS.map((project, idx) => {
-          const projectImages = project.images || (project.image ? [project.image] : []);
-          const currentIdx = currentImageIndexes[idx] || 0;
+          const images = project.images ?? (project.image ? [project.image] : []);
+          const currentIdx = currentIdxs[idx] ?? 0;
           const dateLabel = getDateLabel(project);
           const isEven = idx % 2 === 0;
-          const accentRaw = project.accentColor || '#ef4444';
-          // Normalizar a hex de 6 dígitos (recortar alpha si viene como #rrggbbaa)
+          const accentRaw = project.accentColor ?? '#ef4444';
           const accent = accentRaw.length > 7 ? accentRaw.slice(0, 7) : accentRaw;
 
           return (
@@ -97,70 +73,18 @@ const Projects: React.FC = () => {
             >
               <div className={`grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
 
-                {/* Galería — alterna lado */}
-                <div className={`lg:col-span-3 relative flex items-center gap-4 ${!isEven ? 'lg:order-2' : ''}`}>
-                  {projectImages.length > 1 && (
-                    <button
-                      onClick={() => prevImage(idx, projectImages.length)}
-                      className="text-white p-3 rounded-lg transition-all shadow-lg flex-shrink-0 hover:scale-110"
-                      style={{ backgroundColor: project.accentColor || '#ef4444' }}
-                      aria-label="Imagen anterior"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                  )}
-
-                  <div className="flex-1 relative">
-                    {/* Borde de acento */}
-                    <div
-                      className="absolute -inset-px rounded-xl opacity-30 pointer-events-none z-10"
-                      style={{ boxShadow: `0 0 0 1px ${project.accentColor || '#ef4444'}` }}
-                    />
-                    <div className="aspect-[16/9] rounded-xl overflow-hidden bg-black/40 shadow-2xl">
-                      <div className="relative w-full h-full group/img">
-                      <img
-                        src={projectImages[currentIdx]}
-                        alt={`${project.title} - ${currentIdx + 1}`}
-                        className="w-full h-full object-cover cursor-zoom-in"
-                        onClick={() => setLightbox({ images: projectImages, idx: currentIdx, title: project.title })}
-                      />
-                      <div
-                        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-black/20 cursor-zoom-in pointer-events-none"
-                      >
-                        <ZoomIn className="w-8 h-8 text-white drop-shadow-lg" />
-                      </div>
-                      </div>
-                      {projectImages.length > 1 && (
-                        <>
-                          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                            {projectImages.map((_, dotIdx) => (
-                              <button
-                                key={dotIdx}
-                                onClick={() => setCurrentImageIndexes(prev => ({ ...prev, [idx]: dotIdx }))}
-                                className={`h-2 rounded-full transition-all hover:bg-white ${dotIdx === currentIdx ? 'w-8' : 'w-2 bg-white/40'}`}
-                                style={dotIdx === currentIdx ? { backgroundColor: project.accentColor || '#ef4444' } : {}}
-                                aria-label={`Ir a imagen ${dotIdx + 1}`}
-                              />
-                            ))}
-                          </div>
-                          <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-mono text-white">
-                            {currentIdx + 1} / {projectImages.length}
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  {projectImages.length > 1 && (
-                    <button
-                      onClick={() => nextImage(idx, projectImages.length)}
-                      className="text-white p-3 rounded-lg transition-all shadow-lg flex-shrink-0 hover:scale-110"
-                      style={{ backgroundColor: project.accentColor || '#ef4444' }}
-                      aria-label="Siguiente imagen"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-                  )}
+                {/* Galería */}
+                <div className={`lg:col-span-3 ${!isEven ? 'lg:order-2' : ''}`}>
+                  <ProjectGallery
+                    images={images}
+                    currentIdx={currentIdx}
+                    accentColor={accentRaw}
+                    title={project.title}
+                    onPrev={() => prevImage(idx, images.length)}
+                    onNext={() => nextImage(idx, images.length)}
+                    onDotClick={(dotIdx: number) => setCurrentIdxs((prev: Record<number, number>) => ({ ...prev, [idx]: dotIdx }))}
+                    onOpenLightbox={(imgIdx: number) => setLightbox({ images, initialIdx: imgIdx, title: project.title })}
+                  />
                 </div>
 
                 {/* Info */}
@@ -169,7 +93,7 @@ const Projects: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <span
                       className="text-xs font-mono font-bold px-2.5 py-1 rounded"
-                      style={{ backgroundColor: `${project.accentColor}20`, color: project.accentColor || '#ef4444' }}
+                      style={{ backgroundColor: `${accent}20`, color: accent }}
                     >
                       {String(idx + 1).padStart(2, '0')}
                     </span>
@@ -181,11 +105,8 @@ const Projects: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Título con acento izquierdo */}
-                  <div
-                    className="pl-4 border-l-2"
-                    style={{ borderColor: project.accentColor || '#ef4444' }}
-                  >
+                  {/* Título */}
+                  <div className="pl-4 border-l-2" style={{ borderColor: accent }}>
                     <h4 className="text-3xl lg:text-4xl font-black text-white leading-tight">
                       {project.title}
                     </h4>
@@ -193,9 +114,9 @@ const Projects: React.FC = () => {
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-3">
-                    {project.tags.map((tag, tIdx) => (
+                    {project.tags.map((tag) => (
                       <div
-                        key={tIdx}
+                        key={tag}
                         className="group flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:border-red-500/50 hover:bg-white/10 transition-all"
                       >
                         {TAG_ICONS[tag] && (
@@ -209,9 +130,7 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Descripción */}
-                  <p className="text-gray-200 text-base leading-relaxed">
-                    {project.description}
-                  </p>
+                  <p className="text-gray-200 text-base leading-relaxed">{project.description}</p>
 
                   {/* Links */}
                   <div className="flex items-center gap-3 pt-2">
@@ -232,7 +151,7 @@ const Projects: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-medium transition-all hover:opacity-90"
-                        style={{ backgroundColor: project.accentColor || '#ef4444' }}
+                        style={{ backgroundColor: accentRaw }}
                       >
                         <ExternalLink className="w-4 h-4" />
                         <span>{project.liveLabel ?? 'Demo'}</span>
@@ -244,7 +163,7 @@ const Projects: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-medium transition-all hover:opacity-90"
-                        style={{ backgroundColor: project.accentColor || '#ef4444' }}
+                        style={{ backgroundColor: accentRaw }}
                       >
                         <PenTool className="w-4 h-4" />
                         <span>Prototipo</span>
@@ -259,81 +178,14 @@ const Projects: React.FC = () => {
         })}
       </div>
 
-      {/* Lightbox portal */}
-      {lightbox && ReactDOM.createPortal(
-        <div
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black/92 backdrop-blur-sm cursor-default"
-          onClick={() => setLightbox(null)}
-        >
-          {/* Barra superior */}
-          <div
-            className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 py-4 bg-black"
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          >
-            <span className="text-white/80 text-sm font-medium">{lightbox.title} — {lightbox.idx + 1} / {lightbox.images.length}</span>
-            <div className="flex items-center gap-2">
-              <a
-                href={lightbox.images[lightbox.idx]}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-lg transition-all"
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-                <span>Abrir original</span>
-              </a>
-              <button
-                onClick={() => setLightbox(null)}
-                className="text-white bg-black/70 hover:bg-black/90 border border-white/30 hover:border-white/60 rounded-full p-2.5 transition-all"
-                aria-label="Cerrar"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-
-          {/* Imagen */}
-          <img
-            src={lightbox.images[lightbox.idx]}
-            alt={`${lightbox.title} - ${lightbox.idx + 1}`}
-            className="max-w-[90vw] max-h-[85vh] rounded-xl shadow-2xl object-contain"
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          />
-
-          {/* Flechas de navegación */}
-          {lightbox.images.length > 1 && (
-            <>
-              <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white rounded-full p-3 transition-all"
-                onClick={(e: React.MouseEvent) => { e.stopPropagation(); setLightbox(prev => prev ? { ...prev, idx: (prev.idx - 1 + prev.images.length) % prev.images.length } : null); }}
-                aria-label="Anterior"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white rounded-full p-3 transition-all"
-                onClick={(e: React.MouseEvent) => { e.stopPropagation(); setLightbox(prev => prev ? { ...prev, idx: (prev.idx + 1) % prev.images.length } : null); }}
-                aria-label="Siguiente"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </>
-          )}
-
-          {/* Dots */}
-          {lightbox.images.length > 1 && (
-            <div className="absolute bottom-5 flex gap-2" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-              {lightbox.images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setLightbox(prev => prev ? { ...prev, idx: i } : null)}
-                  className={`h-2 rounded-full transition-all ${i === lightbox.idx ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'}`}
-                  aria-label={`Imagen ${i + 1}`}
-                />
-              ))}
-            </div>
-          )}
-        </div>,
-        document.body
+      {/* Lightbox */}
+      {lightbox && (
+        <ProjectLightbox
+          images={lightbox.images}
+          initialIdx={lightbox.initialIdx}
+          title={lightbox.title}
+          onClose={() => setLightbox(null)}
+        />
       )}
 
       {/* Footer */}

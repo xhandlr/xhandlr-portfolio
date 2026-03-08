@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, Menu, X } from 'lucide-react';
 
+/**
+ * Componente Navbar que muestra la barra de navegación.
+ */
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

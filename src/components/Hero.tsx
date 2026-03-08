@@ -1,8 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, ArrowDown } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 
+/**
+ * Componente Hero que muestra la información principal del portafolio.
+ */
 const Hero: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
@@ -53,10 +56,6 @@ const Hero: React.FC = () => {
             <a href={SOCIAL_LINKS.linkedin} target="_blank" className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors">
               <Linkedin className="w-5 h-5" />
               <span className="text-sm font-mono tracking-wider">LinkedIn</span>
-            </a>
-            <a href={SOCIAL_LINKS.email} className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors">
-              <Mail className="w-5 h-5" />
-              <span className="text-sm font-mono tracking-wider">Email</span>
             </a>
           </div>
 

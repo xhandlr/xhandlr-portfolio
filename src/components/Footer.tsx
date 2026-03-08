@@ -1,8 +1,11 @@
 
 import React from 'react';
-import { Github, Linkedin, Mail, Send, Heart, MapPin, ArrowBigUp } from 'lucide-react';
+import { Github, Linkedin, Send } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 
+/**
+ * Componente Footer que muestra la información de contacto.
+ */
 const Footer: React.FC = () => {
   return (
     <footer id="contact" className="pt-24 pb-12 bg-[#050505] relative overflow-hidden border-t border-white/5">
@@ -10,9 +13,13 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24">
           <div>
             <h2 className="text-sm text-red-500 uppercase tracking-[0.3em] mb-4">Contáctame</h2>
-            <h3 className="text-4xl md:text-5xl font-black mb-8">¿Encontraste algo interesante?</h3>
+            <h3 className="text-4xl md:text-5xl font-black mb-8 leading-snug">
+              ¿Encontraste algo<br />
+              interesante?{' '}
+              <span className="text-red-500">Hablemos.</span>
+            </h3>
             <p className="text-gray-300 text-lg mb-10 max-w-md">
-              Estoy siempre disponible para discutir nuevos proyectos o ideas creativas.
+              Estoy disponible para discutir nuevos proyectos o ideas creativas.
             </p>
             
             <div className="flex items-center space-x-6 mt-12">
@@ -29,16 +36,16 @@ const Footer: React.FC = () => {
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.2em]">Nombre</label>
+                  <label className="text-[12px] font-mono text-gray-400 uppercase tracking-[0.2em]">Nombre</label>
                   <input type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-red-500/50 transition-colors" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.2em]">Correo Electrónico</label>
+                  <label className="text-[12px] font-mono text-gray-400 uppercase tracking-[0.2em]">Correo Electrónico</label>
                   <input type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-red-500/50 transition-colors" />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.2em]">Mensaje</label>
+                <label className="text-[12px] font-mono text-gray-400 uppercase tracking-[0.2em]">Mensaje</label>
                 <textarea rows={4} placeholder="Hola, me gustaría hablar sobre..." className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-red-500/50 transition-colors resize-none"></textarea>
               </div>
               <button className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-[1.02]">

@@ -1,4 +1,4 @@
-# xhandlr — Mi Portafolio Personal
+# xhandlr — Portafolio Personal
 
 Portafolio personal construido con React + TypeScript + Vite. Muestra proyectos, experiencia laboral y un formulario de contacto funcional.
 
@@ -55,5 +55,3 @@ Obtén tu key gratis en [web3forms.com](https://web3forms.com).
 ## Deploy
 
 Configurado para Cloudflare Pages.
-
----

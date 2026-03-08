@@ -19,6 +19,8 @@ const TAG_ICONS: Record<string, string> = {
   "Arduino": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg",
   "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
   "Angular": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+  "SonarQube": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg",
+  "Laravel": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
 };
 
 const Projects: React.FC = () => {
@@ -190,16 +192,16 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {project.tags.map((tag, tIdx) => (
                       <div
                         key={tIdx}
-                        className="group flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/30 transition-all"
+                        className="group flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:border-red-500/50 hover:bg-white/10 transition-all"
                       >
                         {TAG_ICONS[tag] && (
-                          <img src={TAG_ICONS[tag]} alt={tag} className="w-4 h-4 object-contain" />
+                          <img src={TAG_ICONS[tag]} alt={tag} className="w-6 h-6 object-contain" />
                         )}
-                        <span className="text-xs font-mono uppercase tracking-wider text-gray-400 group-hover:text-white transition-colors">
+                        <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                           {tag}
                         </span>
                       </div>
@@ -260,12 +262,12 @@ const Projects: React.FC = () => {
       {/* Lightbox portal */}
       {lightbox && ReactDOM.createPortal(
         <div
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black/92 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black/92 backdrop-blur-sm cursor-default"
           onClick={() => setLightbox(null)}
         >
           {/* Barra superior */}
           <div
-            className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 py-4 bg-gradient-to-b from-black/60 to-transparent"
+            className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 py-4 bg-black"
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             <span className="text-white/80 text-sm font-medium">{lightbox.title} — {lightbox.idx + 1} / {lightbox.images.length}</span>
@@ -281,10 +283,10 @@ const Projects: React.FC = () => {
               </a>
               <button
                 onClick={() => setLightbox(null)}
-                className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all"
+                className="text-white bg-black/70 hover:bg-black/90 border border-white/30 hover:border-white/60 rounded-full p-2.5 transition-all"
                 aria-label="Cerrar"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Github, Linkedin, Mail, Send, Heart, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, Send, Heart, MapPin, ArrowBigUp } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 
 const Footer: React.FC = () => {
@@ -10,29 +10,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24">
           <div>
             <h2 className="text-sm text-red-500 uppercase tracking-[0.3em] mb-4">Contáctame</h2>
-            <h3 className="text-5xl md:text-6xl font-black mb-8 tracking-tighter italic">
-              Puedo ayudarte a construir <br />
-              <span className="text-red-500">algo nuevo.</span>
-            </h3>
-            <p className="text-gray-400 text-lg mb-10 max-w-md">
+            <h3 className="text-4xl md:text-5xl font-black mb-8">¿Encontraste algo interesante?</h3>
+            <p className="text-gray-300 text-lg mb-10 max-w-md">
               Estoy siempre disponible para discutir nuevos proyectos o ideas creativas.
             </p>
             
-            <div className="space-y-6">
-              <div className="flex items-center space-x-4 text-gray-300">
-                <div className="p-3 bg-white/5 rounded-lg text-blue-500">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <span className="font-medium">Temuco, Chile</span>
-              </div>
-              <div className="flex items-center space-x-4 text-gray-300">
-                <div className="p-3 bg-white/5 rounded-lg text-red-500">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <span className="font-medium">.</span>
-              </div>
-            </div>
-
             <div className="flex items-center space-x-6 mt-12">
               <a href={SOCIAL_LINKS.github} target="_blank" className="p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all text-gray-400 hover:text-white border border-white/5 hover:border-blue-500/50">
                 <Github className="w-6 h-6" />
@@ -78,10 +60,6 @@ const Footer: React.FC = () => {
           
           <div className="flex items-center space-x-8">
             <a href="#" className="hover:text-red-500 transition-colors uppercase tracking-widest">Volver arriba</a>
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-              <span className="uppercase tracking-widest text-[10px]">Activo</span>
-            </div>
           </div>
         </div>
       </div>

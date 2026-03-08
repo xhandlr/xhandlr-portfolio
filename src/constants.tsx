@@ -6,7 +6,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Plataforma Centro de Negocios Temuco",
     description: "Sistema de digitalización para centro de negocios gubernamental con asistente virtual RAG, gestión de recursos educativos y arquitectura serverless.",
-    tags: ["Next.js", "Tailwind", "Supabase", "RAG", "Cloudflare"],
+    tags: ["Next.js", "Tailwind", "Supabase", "SonarQube", "Cloudflare"],
     githubUrl: null, 
     liveUrl: "https://cdntemuco.ufro.cl/",
     liveLabel: "Sitio Web",
@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Water Quality Monitoring",
     description: "Sistema IoT de monitoreo en tiempo real integrando sensores físicos (pH, turbidez) con Arduino/MQTT, app móvil Flutter y dashboard React.",
-    tags: ["Flutter", "Arduino", "MQTT", "IoT", "React"],
+    tags: ["Flutter", "Arduino", "Python", "React"],
     githubUrl: "https://github.com/xhandlr/water-quality-monitoring",
     liveUrl: "https://xhandlr.github.io/water-quality-monitoring/",
     date: "Enero 2024",

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ExternalLink, Github, ArrowRight, Calendar, PenTool } from 'lucide-react';
+import { ExternalLink, ArrowRight, Calendar, PenTool } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import { TAG_ICONS } from '../data/tagIcons';
 import { Project } from '../types';
@@ -141,7 +141,7 @@ const Projects: React.FC = () => {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-sm font-medium transition-all"
                       >
-                        <Github className="w-4 h-4" />
+                        <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" className="w-4 h-4" />
                         <span>{project.githubLabel ?? 'Código'}</span>
                       </a>
                     )}

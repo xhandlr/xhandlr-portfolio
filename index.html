@@ -122,6 +122,12 @@
         .delay-300 {
             animation-delay: 1s;
         }
+
+        /* Ocultar cursor personalizado en dispositivos táctiles */
+        @media (hover: none), (pointer: coarse) {
+            body { cursor: auto; }
+            #custom-cursor, #cursor-outline { display: none; }
+        }
     </style>
 <script type="importmap">
 {
@@ -133,7 +139,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body class="blue-gradient-bg">
     <div id="custom-cursor"></div>

@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
             </a>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-16 sm:pb-0">
             <a href="#projects" className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold rounded overflow-hidden transition-all transform hover:-translate-y-1">
               <span className="relative z-10 flex items-center">
                 EXPLORAR PROYECTOS

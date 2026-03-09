@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
           <div className="mb-16">
             <h1 className="text-8xl font-bold leading-tight tracking-tight text-white">
               {displayText}
-              {showCursor && <span className="text-red-500 ml-1">|</span>}
+              <span className={`text-red-500 ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
             </h1>
             <p className="text-red-500 text-3xl mt-6 font-bold tracking-wide">
               Desarrolladora Full Stack

@@ -42,12 +42,18 @@ const ProjectGallery: React.FC<Props> = ({
 
       <div className="aspect-[16/9] rounded-xl overflow-hidden bg-black/40 shadow-2xl">
         <div className="relative w-full h-full group/img">
-          <img
-            src={images[currentIdx]}
-            alt={`${title} - ${currentIdx + 1}`}
-            className="w-full h-full object-cover cursor-zoom-in"
-            onClick={() => onOpenLightbox(currentIdx)}
-          />
+          {images.map((src, idx) => (
+            <img
+              key={src}
+              src={src}
+              alt={idx === currentIdx ? `${title} - ${idx + 1}` : ''}
+              aria-hidden={idx !== currentIdx}
+              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-300 ${
+                idx === currentIdx ? 'opacity-100 cursor-zoom-in' : 'opacity-0 pointer-events-none'
+              }`}
+              onClick={idx === currentIdx ? () => onOpenLightbox(idx) : undefined}
+            />
+          ))}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-black/20 cursor-zoom-in pointer-events-none">
             <ZoomIn className="w-8 h-8 text-white drop-shadow-lg" />
           </div>

@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
     tags: ["Flutter", "Arduino", "Python", "React"],
     githubUrl: "https://github.com/xhandlr/water-quality-monitoring",
     liveUrl: "https://xhandlr.github.io/water-quality-monitoring/",
-    date: "Enero 2024",
+    date: "Noviembre 2025 - Enero 2026",
     accentColor: "#01afceff",
     images: [
       "/projects/aurix-1.png",
@@ -125,8 +125,8 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     tags: ["Next.js", "Tailwind", "Supabase", "SonarQube", "Cloudflare"],
   },
   {
-    start: "Ene 2024",
-    finish: "Ene 2024",
+    start: "Jul 2025",
+    finish: "Ago 2025",
     title: "Práctica I - Full-Stack",
     org: "CEOSim",
     desc: "Desarrollo de nuevas funcionalidades para plataforma SaaS bajo metodología ágil (Jira). Incluyendo un sistema de logros completos y optimización de rendimiento con la reducción de 74% en peso de assets.",
